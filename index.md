@@ -2,9 +2,9 @@
 
 # OpenSDK Java
 
-ucloud开发者工具套件（SDK）。
+Ucloud 开发者工具套件（SDK）。
 
-面向UCloud的多个产品服务，目前包括：
+面向 UCloud 的多个产品服务，目前包括：
 
 - uhost
 - udisk
@@ -21,18 +21,18 @@ ucloud开发者工具套件（SDK）。
 - ocr
 - usms
 
-后续将支持更多的UCloud的产品服务。
+后续将支持更多的 UCloud 的产品服务。
 
 ### 使用准备
 
-- 需要一个UCloud的账号以及一对PrivateKey、PublicKey[点此获取](https://console.ucloud.cn/uapi/apikey)
+- 需要一个 UCloud 的账号以及一对 PrivateKey、PublicKey [点此获取](https://console.ucloud.cn/uapi/apikey)
 
-### sdk获取
+### SDK 获取
 
-方式一、maven仓库
+方式一、maven 仓库
 
-以使用udisk为例：
-    
+以使用 udisk 为例：
+
 ```xml
 <dependency>
   <groupId>cn.ucloud</groupId>
@@ -45,9 +45,9 @@ ucloud开发者工具套件（SDK）。
 
 ### 快速开始
 
-以使用“获取udisk信息”为例：
+以使用“获取 udisk 信息”为例：
 
-第一步、创建UdiskClient并实例化，默认实例化为DefaultUdiskClient
+第一步、创建 UdiskClient 并实例化，默认实例化为 DefaultUdiskClient
 
         在ucloud-sdk-java中，*Client都是sdk的客户端接口，通过*Client发起目标操作。并且，*Client都有一个已经
      实现的Default*Client。
@@ -56,7 +56,7 @@ ucloud开发者工具套件（SDK）。
      需要一些其他的必要参数，这个需要根据具体使用的Client确定。
 
             
-第二步、创建DescribeUDiskParam并实例化，作为请求的参数对象
+第二步、创建 DescribeUDiskParam 并实例化，作为请求的参数对象
     
         在ucloud-sdk-java中，*Param对象都是请求的参数类。
         
