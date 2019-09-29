@@ -26,7 +26,7 @@ ucloud开发者工具套件（SDK）。
 ### 使用准备
 
 - 需要一个UCloud的账号以及一对PrivateKey、PublicKey[点此获取](https://console.ucloud.cn/uapi/apikey)
-  
+
 ### sdk获取
 
 方式一、maven仓库
@@ -133,59 +133,3 @@ public class Main {
     }
 }
 ```
-
-### 版本更新历史
-
-- 0.6-release
-
-    第一个正式版本，支持了udisk,ufile,uhost,vpc,unet,ulb的产品服务调用
-- 0.6.1-release
-
-    修复了ucloud-sdk-java-common中存在的publicKey编码问题
-- 0.6.2-release
-
-    支持获取基础数据的接口GetRegion和GetProjectList
-- 0.6.3-release
-
-    修复个别接口返回结果和实际有出入的问题
-- 0.6.3.1-release
-
-    修复DescribeEIP接口与实际接口有出入的问题
-- 0.8.0-release
-    
-    新增UMem/USQL/UDB/PATHX/UDPN产品，对既有产品接口进行更新维护
-- 0.8.1-release
-
-    修复UNet.CreateFirewall规则错误的bug以及udb部分接口与实际返回有出入的问题
-- 0.8.1.1-release
-
-    修复UNet.UpdateFirewall规则错误的bug
-    
-- 0.8.2-release
-    
-    新增UAI的Censor/OCR产品，部分接口更新维护
-
-- 0.8.2.1-release
-
-    USQL维护更新
-
-- 0.8.2.2-release
-    
-    UHost、UDisk维护更新
-
-- 0.8.2.3-release
-    
-    UDB、UMem维护更新，UHost创建主机时绑定EIP和删除主机时解绑EIP、UDisk功能  
-    维护更新，新增USMS产品
-
-- 0.8.2.4-release
-    
-    UDB维护更新，common错误修复
-
-- 0.8.2.5-release
-    
-    UDB、USMS 、UFS、UNET、USQL、VPC维护更新，接口入参和返回参数变动，部分接口废弃
-
-- 0.8.2.6-release
-
-    UDB、UMEM、UFS维护更新，UFS部分接口增加必要字段
