@@ -37,7 +37,7 @@ Ucloud 开发者工具套件（SDK）。
 <dependency>
   <groupId>cn.ucloud</groupId>
   <artifactId>ucloud-sdk-java-udisk</artifactId>
-  <version>0.8.2.6-release</version>
+  <version>0.8.2.8-release</version>
 </dependency>
 ```
 
