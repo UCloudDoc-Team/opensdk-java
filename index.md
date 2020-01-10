@@ -118,8 +118,7 @@ public class Main {
 
     public static void main(String []args)  {
         UdiskClient client = new DefaultUdiskClient(new UdiskConfig(
-                new Account("PrivateKey",
-                        "PublicKey")
+                new Account("PrivateKey","PublicKey")
         ));
         DescribeUDiskParam param = new DescribeUDiskParam("region");
         param.setProjectId("projectId");
