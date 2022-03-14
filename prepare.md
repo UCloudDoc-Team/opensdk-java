@@ -15,7 +15,7 @@
 <dependency>
   <groupId>cn.ucloud</groupId>
   <artifactId>ucloud-sdk-java-udisk</artifactId>
-  <version>0.8.3.0-release</version>
+  <version>0.8.4.4-release</version>
 </dependency>
 ```
 
