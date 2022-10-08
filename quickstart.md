@@ -34,7 +34,7 @@
 
 ```java
 try{
-    result = client.method(param);
+    result = client.method(req);
 } catch (Exception e){
     // 这里可能会抛出一些异常
     // 比如网络异常，业务状态码 RetCode 不为 0 等
