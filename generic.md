@@ -11,25 +11,36 @@
 ### 添加参数对象
 
 ```java
-import cn.ucloud.common.annotation.UcloudParam;
-import cn.ucloud.common.pojo.BaseRequestParam;
+package cn.ucloud.example;
 
-import javax.validation.constraints.NotEmpty;
+import cn.ucloud.common.annotation.UCloudParam;
+import cn.ucloud.common.request.Request;
 
-public class DescribeImageParam extends BaseRequestParam {
-    @UcloudParam("Region")
+import java.util.List;
+
+public class GetMetricParam extends Request {
+    @UCloudParam("Region")
     private String region;
 
-    @UcloudParam("Zone")
+    @UCloudParam("Zone")
     private String zone;
 
-    public DescribeImageParam(
-            @NotEmpty(message = "region can not be empty") String region,
-            @NotEmpty(message = "zone can not be empty") String zone
-    ) {
-        super("DescribeImage");
+    @UCloudParam("ResourceType")
+    private String resourceType;
+
+    @UCloudParam("ResourceId")
+    private String resourceId;
+
+    @UCloudParam("MetricName")
+    private List<String> metricNameList;
+
+    public GetMetricParam(String region, String zone, String resourceType, String resourceId, List<String> metricNameList) {
+        super.setAction("GetMetric");
         this.region = region;
         this.zone = zone;
+        this.resourceType = resourceType;
+        this.resourceId = resourceId;
+        this.metricNameList = metricNameList;
     }
 }
 ```
@@ -37,18 +48,26 @@ public class DescribeImageParam extends BaseRequestParam {
 ### 添加响应对象
 
 ```java
-import cn.ucloud.common.pojo.BaseResponseResult;
+package cn.ucloud.example;
+
+import cn.ucloud.common.response.Response;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Map;
 
-public class DescribeImageResult extends BaseResponseResult {
-    @SerializedName("ImageSet")
-    private List<ImageSet> imageSet;
-
-    public static class ImageSet {
-        @SerializedName("ImageId")
-        private String imageId;
+public class GetMetricResult extends Response {
+    @SerializedName("DataSets")
+    public DataSets dataSets;
+    public static class DataSets {
+        @SerializedName("CPUUtilization")
+        public List<MetricValue> cpuUtilization;
+    }
+    public static class MetricValue {
+        @SerializedName("Timestamp")
+        public String timestamp;
+        @SerializedName("Value")
+        public String value;
     }
 }
 ```
@@ -56,35 +75,45 @@ public class DescribeImageResult extends BaseResponseResult {
 ### 调用泛化请求方法
 
 ```java
-import cn.ucloud.common.client.UcloudClient;
-import cn.ucloud.common.pojo.Account;
-import cn.ucloud.common.pojo.UcloudConfig;
-import cn.ucloud.common.client.DefaultUcloudClient;
+package cn.ucloud.example;
+
+import cn.ucloud.common.client.DefaultClient;
+import cn.ucloud.common.config.Config;
+import cn.ucloud.common.credential.Credential;
+import cn.ucloud.common.request.Request;
+
+import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // build client
-        UcloudClient client = new DefaultUcloudClient(new UcloudConfig(
-                new Account(
-                        System.getenv("UCLOUD_PRIVATE_KEY"),
-                        System.getenv("UCLOUD_PUBLIC_KEY")
-                )
-        ));
+        Config config = new Config();
+        String publicKey = "publicKey";
+        String privateKey = "privateKey";
+        String region = "cn-bj2";
+        String zone = "cn-bj2-04";
+        String resourceType = "uhost";
+        String resourceId = "uhost-xxx";
 
-        // build params
-        DescribeImageParam param = new DescribeImageParam("cn-bj2", "cn-bj2-02");
-        param.setProjectId(System.getenv("UCLOUD_PROJECT_ID"));
+        Credential credential =
+                new Credential(
+                        publicKey, privateKey);
+        DefaultClient client = new DefaultClient(config, credential);
 
-        // invoke action
-        DescribeImageResult result = null;
+        List<String> metricNameList = new ArrayList<String>();
+        metricNameList.add("CPUUtilization");
+        Request request = new GetMetricParam(region, zone, resourceType, resourceId, metricNameList);
+        GetMetricResult getMetricResult = null;
         try {
-            result = (DescribeImageResult) client.doAction(param, DescribeImageResult.class);
+            getMetricResult = (GetMetricResult) client.invoke(request, GetMetricResult.class);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
-
-        // show response
-        System.out.println(result);
+        System.out.println(new Gson().toJson(getMetricResult));
     }
 }
 ```
